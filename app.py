@@ -2,6 +2,8 @@
 
 from flask import Flask, request, render_template
 from transcribe import transcribe
+import time
+import json
 
 app = Flask(__name__)
 
@@ -24,5 +26,12 @@ def upload():
         return 'Called via POST method. Well done!'
     else:
         return 'GET method. Duh...'
+
+@app.route('/process', methods=['POST'])
+def process():
+    time.sleep(5)
+    res = {'status': 'success', 'message': 'Hello world!'}
+    return json.dumps(res)
+    
 
 app.run(host="0.0.0.0")
