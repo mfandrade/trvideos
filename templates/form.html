@@ -58,24 +58,7 @@
         <script src="http://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-        <script>
-            var loading = $('div#loading');
-            $(function() {
-              $('form').submit(function(e) {
-                e.preventDefault();
-                loading.show();
-                $.ajax({
-                  url: '/process', // # TODO: endereço destino
-                  data: $(this).serialize(),
-                  method: 'post',
-                  dataType: 'JSON'
-                }).done(function(res) {
-                  loading.hide();
-                  alert(res.status);
-                });
-              });
-            });
-        </script>
+        <script src="{{ url_for('static', filename='js/form-submit.js') }}" type="text/javascript"></script>
     </body>
 </html>
 
