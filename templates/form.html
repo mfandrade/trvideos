@@ -16,7 +16,7 @@
         <![endif]-->
     </head>
     <body>
-        <form class="form-horizontal" enctype="multipart/form-data" method="post" action="cgi-bin/result.cgi">
+        <form class="form-horizontal" enctype="multipart/form-data" method="post">
             <fieldset>
                 <!-- Form Name -->
                 <legend>Gerador de transcrição de vídeos</legend>
@@ -51,6 +51,10 @@
                 </div>
             </fieldset>
         </form>
+        <hr>
+        {% if text %}
+           <p>Transcrição: <em>"{{ text }}"</em></p>
+        {% endif %}
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
         <script src="http://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
