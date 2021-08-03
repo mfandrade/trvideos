@@ -4,9 +4,13 @@ from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
+@app.route('/hello')
+def hello():
+    return 'Hello world!'
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('form.html')
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -15,4 +19,4 @@ def upload():
     else:
         return 'GET method. Duh...'
 
-app.run()
+app.run(host="0.0.0.0")
