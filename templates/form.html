@@ -8,6 +8,19 @@
         <title>Gerador de transcrição de vídeos</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <style type="text/css">
+            #loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.75) url({{url_for('static', filename='img/loading.gif')}}) no-repeat center center;
+            z-index: 10000;
+            }
+        </style>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -16,7 +29,7 @@
         <![endif]-->
     </head>
     <body>
-        <form class="form-horizontal" enctype="multipart/form-data" method="post">
+        <form class="form-horizontal">
             <fieldset>
                 <!-- Form Name -->
                 <legend>Gerador de transcrição de vídeos</legend>
@@ -33,10 +46,10 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-2">
-                                <input id="begin" name="begin" type="text" placeholder="mm:ss" class="form-control input-md" value="00:00" data-mask="00:00" data-mask-selectonfocus="true">
+                                <input id="begin" name="begin" type="text" class="form-control input-md" placeholder="mm:ss" value="00:00" data-mask="00:00" data-mask-selectonfocus="true">
                             </div>
                             <div class="col-md-2">
-                                <input id="end" name="end" type="text" placeholder="mm:ss" class="form-control input-md" value="10:00" data-mask="00:00" data-mask-selectonfocus="true">
+                                <input id="end" name="end" type="text" class="form-control input-md" placeholder="mm:ss" value="10:00" data-mask="00:00" data-mask-selectonfocus="true">
                             </div>
                         </div>
                         <span class="help-block">ajuda</span>   
@@ -51,15 +64,31 @@
                 </div>
             </fieldset>
         </form>
-        <hr>
-        {% if text %}
-           <p>Transcrição: <em>"{{ text }}"</em></p>
-        {% endif %}
+        <div id="loader"></div>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
         <script src="http://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+        <script>
+            var spinner = $('#loader');
+            $(function() {
+              $('form').submit(function(e) {
+                e.preventDefault();
+                spinner.show();
+                $.ajax({
+                  url: '/process', // # TODO: endereço destino
+                  data: $(this).serialize(),
+                  method: 'post',
+                  dataType: 'JSON'
+                }).done(function(res) {
+                  spinner.hide();
+                  alert(res.status);
+                });
+              });
+            });
+        </script>
     </body>
 </html>
+
 
