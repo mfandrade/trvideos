@@ -42,6 +42,7 @@
                     <label for="" class="form-label">&nbsp;</label>
                     <button class="w-100 btn btn-primary" type="submit">Transcrever</button>
                 </div>
+                {% if transcription %}
                 <hr>
                 <div class="col">
                     <div class="card">
@@ -56,15 +57,15 @@
                             <div class="col-md-9">
                                 <div class="card-body">
                                     <h5 class="card-title">Transcrição</h5>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                
+                                    <p class="card-text"><small class="text-muted">Arquivo de vídeo: {{ filename }} (trecho: {{ begin }})-{{ end }})</small></p>
+                                    <p class="card-text">{{ transcription }}</p>
                                     <a href="#" class="card-link">(copiar)</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </form>
         </div>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
