@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
 from flask import Flask, request, render_template
+from werkzeug.utils import secure_filename
 from transcribe import transcribe
-import time
-import json
 
 app = Flask(__name__)
-
+app.config['UPLOAD_FOLDER']    = '/tmp'
+app.config['MAX_CONTENT_PATH'] = 100 * 1024 * 1024
 
 @app.route('/hello')
 def hello():
@@ -16,15 +16,10 @@ def hello():
 def index():
     transcription = ''
     if request.method == 'POST':
-        transcription = transcribe('2021-07-01-114242.webm')
+        f = request.files['filefield']
+        f.save(secure_filename(f.filename))
+        transcription = transcribe(f.filename)
 
     return render_template('form.html', transcription=transcription)
 
-@app.route('/process', methods=['POST'])
-def process():
-    time.sleep(5)
-    res = {'status': 'success', 'message': 'Hello world!'}
-    return json.dumps(res)
-    
-
-app.run(host="0.0.0.0")
+app.run(host="0.0.0.0", debug=True)
