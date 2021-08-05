@@ -7,3 +7,4 @@ v3.0 - 2021-08-05
 
 ACTIONS
 - Desabilitação dos campos numéricos
+- Correção da url do jquery-mask com https
