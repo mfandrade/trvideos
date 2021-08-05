@@ -14,18 +14,11 @@ def hello():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    text = '(blank)'
+    transcription = ''
     if request.method == 'POST':
-        text = transcribe('2021-07-01-114242.webm')
+        transcription = transcribe('2021-07-01-114242.webm')
 
-    return render_template('form.html', text=text)
-
-@app.route('/upload', methods=['GET', 'POST'])
-def upload():
-    if request.method == 'POST':
-        return 'Called via POST method. Well done!'
-    else:
-        return 'GET method. Duh...'
+    return render_template('form.html', transcription=transcription)
 
 @app.route('/process', methods=['POST'])
 def process():
