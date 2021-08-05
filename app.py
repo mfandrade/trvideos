@@ -17,10 +17,16 @@ def index():
     transcription = ''
     info = ''
     if request.method == 'POST':
-        f = request.files['filefield']
-        f.save(secure_filename(f.filename))
-        transcription = transcribe(f.filename)
-        info = f'Arquivo: {f.filename}'
+        if 'filefield' in request.files:
+            f = request.files['filefield']
+            f.save(secure_filename(f.filename))
+            transcription = transcribe(f.filename)
+            info = f'Arquivo: {f.filename}'
+        if 'begin' in request.form and 'end' in request.form:
+            begin = request.form['begin']
+            end = request.form['end']
+            if len(begin) > 0 and len(end) > 0:
+                info += f' (trecho: {begin}-{end})'
 
     return render_template('form.html', transcription=transcription, info=info)
 
