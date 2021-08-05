@@ -15,11 +15,13 @@ def hello():
 @app.route('/', methods=['GET', 'POST'])
 def index():
     transcription = ''
+    info = ''
     if request.method == 'POST':
         f = request.files['filefield']
         f.save(secure_filename(f.filename))
         transcription = transcribe(f.filename)
+        info = f'Arquivo: {f.filename}'
 
-    return render_template('form.html', transcription=transcription)
+    return render_template('form.html', transcription=transcription, info=info)
 
 app.run(host="0.0.0.0", debug=True)
