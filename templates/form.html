@@ -12,6 +12,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+        <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     </head>
     <body>
         <div class="container">
@@ -46,22 +47,11 @@
                 <hr>
                 <div class="col-10">
                     <div class="card">
-                        <div class="row g-0">
-                            <div class="col-md-3">
-                                <svg class="bd-placeholder-img" width="100%" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                    <title>Placeholder</title>
-                                    <rect width="100%" height="100%" fill="#868e96"></rect>
-                                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text>
-                                </svg>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="card-body">
-                                    <h5 class="card-title">Transcrição</h5>
-                                    <p class="card-text"><small class="text-muted">{{ info }}</small></p>
-                                    <p class="card-text">{{ transcription }}</p>
-                                    <a href="#" class="card-link">(copiar)</a>
-                                </div>
-                            </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Transcrição</h5>
+                            <p class="card-text"><small class="text-muted">{{ info }}</small></p>
+                            <p class="card-text">{{ transcription }}</p>
+                            <button type="button" class="btn btn-link">copiar</button>
                         </div>
                     </div>
                 </div>
