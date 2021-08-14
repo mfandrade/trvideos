@@ -28,6 +28,6 @@ def index():
             if len(begin) > 0 and len(end) > 0:
                 info += f' (trecho: {begin}-{end})'
 
-    return render_template('form.html', transcription=transcription, info=info)
+    return render_template('trt8.html', transcription=transcription, info=info)
 
 app.run(host="0.0.0.0", debug=True)
