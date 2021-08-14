@@ -1,78 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
     <head>
-        <title>Gerador de transcrição de vídeos</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css">
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-        <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+        <!-- *************************************************************** -->
+        <title>Gerador de transcrição de vídeos</title>
+        <style>
+            h1 {
+            text-align: center;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
-            <h1>Gerador de transcrição de vídeos</h1>
-            <form class="row g-2" method="post" enctype="multipart/form-data">
-                <div class="col-6">
-                    <label for="formGroupExampleInput" class="form-label">Arquivo de vídeo</label>
-                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-                        <div class="form-control" data-trigger="fileinput">
-                            <span class="fileinput-filename"></span>
+            <div class="row">
+                <div class="col-4"><img src="https://www.trt8.jus.br/sites/all/themes/jt_2019_d7/images/logo_v14.png" alt="TRT8"></div>
+                <div class="col align-items-center">
+                    <h1>Gerador de transcrição de vídeos</h1>
+                </div>
+            </div>
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="col-6">
+                        <label for="formGroupExampleInput" class="form-label">Arquivo de vídeo</label>
+                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                            <div class="form-control" data-trigger="fileinput">
+                                <span class="fileinput-filename"></span>
+                            </div>
+                            <span class="input-group-append">
+                            <span class="input-group-text btn-file">
+                            <span class="fileinput-new">Selecione...</span>
+                            <span class="fileinput-exists">Selecione...</span>
+                            <input type="file" name="filefield">
                         </div>
-                        <span class="input-group-append">
-                        <span class="input-group-text btn-file">
-                        <span class="fileinput-new">Selecione...</span>
-                        <span class="fileinput-exists">Selecione...</span>
-                        <input type="file" name="filefield">
                     </div>
-                </div>
-                <div class="col-2">
-                    <label for="formGroupExampleInput" class="form-label">Início</label>
-                    <input type="text" class="form-control" placeholder="mm:ss" aria-label="Início" name="begin" id="begin" data-mask="00:00" disabled>
-                </div>
-                <div class="col-2">
-                    <label for="formGroupExampleInput" class="form-label">Fim</label>
-                    <input type="text" class="form-control" placeholder="mm:ss" aria-label="Fim" name="end" id="end" data-mask="00:00" disabled>
-                </div>
-                <div class="col-2">
-                    <label for="" class="form-label">&nbsp;</label>
-                    <button id="btnSubmit" class="w-100 btn btn-primary" type="submit">Transcrever</button>
-
-                    <button id="btnLoading" class="w-100 btn btn-primary" type="button" disabled style="display:none;">
+                    <div class="col-2">
+                        <label for="begin" class="form-label">Início</label>
+                        <input type="text" class="form-control" placeholder="mm:ss" aria-label="Início" name="begin" id="begin" data-mask="00:00" disabled>
+                    </div>
+                    <div class="col-2">
+                        <label for="end" class="form-label">Fim</label>
+                        <input type="text" class="form-control" placeholder="mm:ss" aria-label="Fim" name="end" id="end" data-mask="00:00" disabled>
+                    </div>
+                    <div class="col-2">
+                        <label for="" class="form-label">&nbsp;</label>
+                        <button id="btnSubmit" class="w-100 btn btn-primary" type="submit">Transcrever</button>
+                        <button id="btnLoading" class="w-100 btn btn-primary" type="button" disabled style="display:none;">
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         Processando...
-                    </button>
-
-                </div>
-                {% if transcription %}
-                <hr>
-                <div class="col-10">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Transcrição</h5>
-                            <p class="card-text"><small class="text-muted">{{ info }}</small></p>
-                            <p class="card-text">{{ transcription }}</p>
-                            <button type="button" class="btn btn-link">copiar</button>
-                        </div>
+                        </button>
                     </div>
                 </div>
-                {% endif %}
             </form>
+			{% if transcription %}
+			<hr>
+			<div class="col-10">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Transcrição</h5>
+						<p class="card-text"><small class="text-muted">{{ info }}</small></p>
+						<p class="card-text">{{ transcription }}</p>
+						<button type="button" class="btn btn-link">copiar</button>
+					</div>
+				</div>
+			</div>
+			{% endif %}      
         </div>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://code.jquery.com/jquery.js"></script>
-        <!-- jQuery Mask for the numeric fields -->
-        <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+        <!-- *************************************************************** -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/js/jasny-bootstrap.min.js"></script>
-
-        <script src="{{ url_for('static', filename='js/formsubmit.js') }}"></script>
     </body>
 </html>
-
