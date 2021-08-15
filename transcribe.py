@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 #
+#- OK cortar video
 #- OK extrair áudio do vídeo
 #- OK mixar canais de áudio
 #- TODO: reduzir ruído, acentuar volume
@@ -9,8 +10,17 @@
 
 def cut_video(videopath, start, end):
     
+    from os.path import splitext
     from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
-    ffmpeg_extract_subclip(videopath, start, end)
+
+    # https://github.com/Zulko/moviepy/blob/cd473ff77ca630fe53fcac74d5c63da188594240/moviepy/video/io/ffmpeg_tools.py#L33
+    name, ext = splitext(videopath)
+    t1, t2 = [int(1000 * t) for t in [start, end]]
+    outputfile = "%s_SUB%d_%d%s" % (name, t1, t2, ext)
+
+    ffmpeg_extract_subclip(videopath, start, end, outputfile)
+
+    return outputfile
 
 
 def define_audio_path(filename=None, dir='/tmp'):
@@ -131,11 +141,12 @@ def send_to_email(content, receiver):
     print('Mail sent')
 
 
-def transcribe(videopath, language='pt-BR'):
+def transcribe(videopath, begin=0.0, end=10.0, language='pt-BR'):
 
     import os, os.path
 
-    audio = save_audio_from_video(videopath)
+    realvideo = cut_video(videopath, begin, end)
+    audio = save_audio_from_video(realvideo)
     folder = split_audio(audio)
     text = ''
     for f in sorted(os.listdir(folder)):
@@ -163,24 +174,7 @@ if __name__ == '__main__':
         print ("Usage: {} <video-file>\n".format(sys.argv[0]))
         sys.exit(1)
 
-    print(transcribe(videopath))
-    '''
-    #print('Extracting audio from video.')
-    audio = save_audio_from_video(videopath)
+    #print(transcribe(videopath))
+    print('Debug mode. Only splitting video...')
+    print(cut_video(videopath, 0.0, 10.0))
 
-    #print('Splitting audio in chunks', end='')
-    folder = split_audio(audio)
-
-    #print('------------------------------------------------------------------------------')
-    #print('TRANSCRIPTION OF "{}": '.format(videopath))
-    text = ''
-    for f in sorted(listdir(folder)):
-    
-        path = join(folder, f)
-        if isfile(path) and path.endswith('.wav'):
-
-            text += transcribe_audio(path)
-
-    print(text)
-    #    send_to_email(text, 'marcelo.andrade@trt8.jus.br')
-    '''
