@@ -23,7 +23,7 @@
                     <h1>Gerador de transcrição de vídeos</h1>
                 </div>
             </div>
-            <form method="post" enctype="multipart/form-data">
+            <form class="needs-validation" method="post" enctype="multipart/form-data">
                 <div class="form-row">
                     <div class="col-6">
                         <label for="formGroupExampleInput" class="form-label">Arquivo de vídeo</label>
@@ -36,6 +36,7 @@
                             <span class="fileinput-new">Selecione...</span>
                             <span class="fileinput-exists">Selecione...</span>
                             <input type="file" name="filefield" required>
+                            <div class="invalid-feedback">Necessário selecionar um arquivo de vídeo (.mp4, .ogg, .webm)</div>
                         </div>
                     </div>
                     <div class="col-2">
