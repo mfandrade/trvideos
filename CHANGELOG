@@ -4,7 +4,8 @@ v3.0 - 2021-08-05
 - Uniformidade visual do campo file
 - Máscara nos campos numéricos
 - Indicação visual no botão
-
-ACTIONS
 - Desabilitação dos campos numéricos
 - Correção da url do jquery-mask com https
+
+v3.1 - 2021-08-16
+- Identidade visual
