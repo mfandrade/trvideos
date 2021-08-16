@@ -156,8 +156,7 @@ def transcribe(videopath, begin=0.0, end=-1.0, language='pt-BR'):
     for f in sorted(os.listdir(folder)):
         path = os.path.join(folder, f)
         if os.path.isfile(path) and path.endswith('.wav'):
-            snippet = transcribe_audio(path)
-            text += snippet.capitalize() + '. '
+            text += transcribe_audio(path)
 
     return text
 
