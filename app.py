@@ -20,19 +20,24 @@ def index():
     info = ''
 
     if request.method == 'POST':
-        if not 'filefield' in request.files:
+        if not 'filefield' in request.files or request.files['filefield'].filename == '':
             redirect(request.url)
 
-        else:
-            f = request.files['filefield']
-            filename = secure_filename(f.filename)
-            f.save(join(app.config['UPLOAD_FOLDER'], filename))
-
-            info = f'Arquivo: {filename}'
+        f = request.files['filefield']
+            
+        filename = join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename))
+        f.save(filename)
+        info = f'Arquivo: {f.filename}'
 
         begin = 0.0
         end = -1.0
-        if 'begin' in request.form and 'end' in request.form:
+        if not 'begin' in request.form or not 'end' in request.form:
+            redirect(request.url)
+
+        if request.form['begin'] == '' or request.form['end'] == '':
+            transcription = transcribe(filename)
+            
+        else:
             beginmm, beginss = request.form['begin'].split(':')
             endmm, endss = request.form['end'].split(':')
 
@@ -40,8 +45,7 @@ def index():
             end = int(endss) + int(endmm) * 60 
 
             info = info + f' (trecho: {beginmm}:{beginss} a {endmm}:{endss})'
-
-        transcription = transcribe(filename, begin=min(begin, end), end=max(begin, end))
+            transcription = transcribe(filename, begin=min(begin, end), end=max(begin, end))
 
     return render_template('trt8.html', transcription=transcription, info=info)
 
