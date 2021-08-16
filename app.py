@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from os.path import join
 from flask import Flask, redirect, request, render_template
 from werkzeug.utils import secure_filename
 from transcribe import transcribe
@@ -25,7 +26,7 @@ def index():
         else:
             f = request.files['filefield']
             filename = secure_filename(f.filename)
-            f.save(filename)
+            f.save(join(app.config['UPLOAD_FOLDER'], filename))
 
             info = f'Arquivo: {filename}'
 
