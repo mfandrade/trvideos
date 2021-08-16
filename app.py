@@ -38,12 +38,9 @@ def index():
             begin = int(beginss) + int(beginmm) * 60 
             end = int(endss) + int(endmm) * 60 
 
-            begin = abs(min(float(request.form['begin'], float(request.form['end']))))
-            end = abs(max(float(request.form['begin'], float(request.form['end']))))
-            
-            info = info + f' (trecho: {begin} a {end})'
+            info = info + f' (trecho: {beginmm}:{beginss} a {endmm}:{endss})'
 
-        transcription = transcribe(filename, begin=begin, end=end)
+        transcription = transcribe(filename, begin=min(begin, end), end=max(begin, end))
 
     return render_template('trt8.html', transcription=transcription, info=info)
 
