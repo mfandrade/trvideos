@@ -141,11 +141,15 @@ def send_to_email(content, receiver):
     print('Mail sent')
 
 
-def transcribe(videopath, begin=0.0, end=10.0, language='pt-BR'):
+def transcribe(videopath, begin=0.0, end=-1.0, language='pt-BR'):
 
     import os, os.path
 
-    realvideo = cut_video(videopath, begin, end)
+    if end <= begin:
+        realvideo = videopath
+    else:
+        realvideo = cut_video(videopath, begin, end)
+
     audio = extract_audio_from_video(realvideo)
     folder = split_audio(audio)
     text = ''
