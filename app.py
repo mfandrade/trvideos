@@ -32,6 +32,12 @@ def index():
         begin = 0.0
         end = -1.0
         if 'begin' in request.form and 'end' in request.form:
+            beginmm, beginss = request.form['begin'].split(':')
+            endmm, endss = request.form['end'].split(':')
+
+            begin = int(beginss) + int(beginmm) * 60 
+            end = int(endss) + int(endmm) * 60 
+
             begin = abs(min(float(request.form['begin'], float(request.form['end']))))
             end = abs(max(float(request.form['begin'], float(request.form['end']))))
             
