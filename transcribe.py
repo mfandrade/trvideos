@@ -37,7 +37,7 @@ def define_audio_path(filename=None, dir='/tmp'):
     return dir + '/trvideos-' + suffix
 
 
-def save_audio_from_video(videopath, basedir='/tmp'):
+def extract_audio_from_video(videopath, basedir='/tmp'):
     
     import moviepy.editor as mpye
     
@@ -146,7 +146,7 @@ def transcribe(videopath, begin=0.0, end=10.0, language='pt-BR'):
     import os, os.path
 
     realvideo = cut_video(videopath, begin, end)
-    audio = save_audio_from_video(realvideo)
+    audio = extract_audio_from_video(realvideo)
     folder = split_audio(audio)
     text = ''
     for f in sorted(os.listdir(folder)):
