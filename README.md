@@ -117,7 +117,7 @@ uma API [REST](https://pt.wikipedia.org/wiki/REST)
 No momento a interface web desta aplicação está disponilizada em ambiente de
 homologação no endereço https://trvideos.trt8.jus.br
 
-![Tela inicial da aplicação](static/img/screenshot.jpg)
+![Tela inicial da aplicação](static/img/screenshot.png)
 
 **Modo de usar**
 
