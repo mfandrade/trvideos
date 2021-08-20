@@ -131,6 +131,27 @@ Opcionalmente você pode informar também tempo de inícios de fim, e assim, o
 texto a ser exibido corresponderá apenas período especificado ao invés de todo
 o vídeo.
 
+# Sobre a interface web
+
+Como dito, a interface web apenas expõe chamadas ao script de backend via
+API REST por meio do microframework Flask.
+
+Este microframework utiliza um sistema de templates de forma que a identidade
+visual da apliação pode ser facilmente alterada ou criando-se um novo
+template ou mesmo facilmente alterando-se o arquivo do template atualmente
+utilizado definido no arquivo `templates/trt8.html`.
+
+Ressalte-se ainda que este template inicial já está construído de acordo com
+boas práticas para criação de formulários web com o framework
+[Bootstrap](https://getbootstrap.com/).  Adicionalmente, para uniformidade
+visual do campo de upload de arquivo, incluiu-se também uma derivação do 
+Bootstrap chamada [Jasny](http://www.jasny.net/bootstrap/).
+
+Note-se que para completa funcionalidade este framework utiliza o framework
+Javascript [jQuery](https://jquery.com/).  Aproveitando-se disso, também
+já se fez um tratamento nos campos de entrada de tempos por meio do
+[jQuery Mask Plugin](https://igorescobar.github.io/jQuery-Mask-Plugin/)
+
 
 # Limitações, bugs conhecidos e implementações futuras
 
