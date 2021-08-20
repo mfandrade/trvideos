@@ -179,7 +179,7 @@ if __name__ == '__main__':
         print ("Usage: {} <video-file>\n".format(sys.argv[0]))
         sys.exit(1)
 
-    #print(transcribe(videopath))
-    print('Debug mode. Only splitting video...')
-    print(cut_video(videopath, 0.0, 10.0))
+    print(transcribe(videopath))
+    #print('Debug mode. Only splitting video...')
+    #print(cut_video(videopath, 0.0, 10.0))
 
